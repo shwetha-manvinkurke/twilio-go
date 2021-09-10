@@ -1,9 +1,17 @@
 name: Go
-on: [pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
 jobs:
 
   build:
     name: Build
+    strategy:
+      matrix:
+        go: [1.16, 1.17]
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.16
@@ -22,9 +30,20 @@ jobs:
               curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
               dep ensure
           fi
+          
+      - name: Install
+        run: make install
 
       - name: Build
         run: go build -v ./...
 
       - name: Test
         run: go test ./...
+        
+      - name: Coverage
+        run: make cover
+        
+      - name: Deploy
+        if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' && matrix.go == '1.16' }}
+        run: make docker-build && make docker-push
+
