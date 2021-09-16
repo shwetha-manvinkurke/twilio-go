@@ -5,17 +5,24 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 orbs:
   go: circleci/go@1.7.0
+executors:
+  linux:
+    docker:
+      - image: cimg/base:2020.01
 jobs:
   say-hello:
-    # Specify the execution environment.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    parameters:
+      os:
+        type: executor
+      go-version:
+        type: string
+    executor: << parameters.os >>
     steps:
       - checkout
-      - go/install
+      - go/install:
+          version: << parameters.go-version >>
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
@@ -28,10 +35,41 @@ jobs:
             mkdir -p test-results
       - store_test_results:
           path: test-results
+      
+# jobs:
+#   say-hello:
+#     # Specify the execution environment.
+#     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+#     docker:
+#       - image: cimg/base:stable
+#     # Add steps to the job
+#     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+#     steps:
+#       - checkout
+#       - go/install
+#       - run:
+#           name: "Say hello"
+#           command: "echo Hello, World!"
+#       - run:
+#           name: "Run tests"
+#           command: "make test"
+#       - run:
+#           name: Save test results
+#           command: |
+#             mkdir -p test-results
+#       - store_test_results:
+#           path: test-results
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
+      - say-hello:
+          matrix:
+            parameters:
+              os: [linux]
+              go-version: ["1.16", "1.17"]
+  # say-hello-workflow:
+  #   jobs:
+  #     - say-hello
