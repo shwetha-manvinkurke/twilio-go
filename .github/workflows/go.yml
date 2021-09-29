@@ -1,13 +1,13 @@
 name: Go
 on:
   push:
-    branches: [ main ]
+    branches: [ '*' ]
   pull_request:
     branches: [ main ]
     
 jobs:
   build:
-    name: Build
+    name: run tests
     strategy:
       matrix:
         go: [1.16, 1.17]
@@ -41,7 +41,11 @@ jobs:
         
       - name: Coverage
         run: make cover
-        
+
+      - name: Run cluster tests
+        if: ${{ github.event.pull_request.merged }}
+        run: make cluster-test
+
       - name: Deploy
         if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' && matrix.go == '1.16' }}
         run: make docker-build && make docker-push
