@@ -43,7 +43,7 @@ jobs:
         run: make cover
 
       - name: Run cluster tests
-        if: ${{ github.event.pull_request.merged }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: make cluster-test
 
       - name: Deploy
