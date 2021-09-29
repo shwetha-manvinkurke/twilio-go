@@ -6,9 +6,8 @@ on:
     branches: [ main ]
     
 jobs:
-
   build:
-    name: Build
+    name: run tests
     strategy:
       matrix:
         go: [1.16, 1.17]
