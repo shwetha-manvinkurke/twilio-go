@@ -41,7 +41,11 @@ jobs:
         
       - name: Coverage
         run: make cover
-        
+
+      - name: Run cluster tests
+        if: ${{ github.event.pull_request.merged }}
+        run: make cluster-test
+
       - name: Deploy
         if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' && matrix.go == '1.16' }}
         run: make docker-build && make docker-push
