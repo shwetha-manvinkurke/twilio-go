@@ -26,7 +26,7 @@ func TestTwilioRestError_Error(t *testing.T) {
 		MoreInfo: errorMoreInfo,
 		Status:   errorStatus,
 	}
-	expected := "Status: 400 - ApiError 20001: Bad request ({\"foo\":\"bar\"}) More info: https://www.twilio.com/docs/errors/20001 valid"
+	expected := "Status: 400 - ApiError 20001: Bad request ({\"foo\":\"bar\"}) More info: https://www.twilio.com/docs/errors/20001"
 	assert.Equal(t, expected, err.Error())
 }
 
