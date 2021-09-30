@@ -1,5 +1,6 @@
 # twilio-go
 
+[![Go](https://github.com/shwetha-manvinkurke/twilio-go/actions/workflows/go.yml/badge.svg)](https://github.com/shwetha-manvinkurke/twilio-go/actions/workflows/go.yml)
 [![Build Status](https://travis-ci.com/twilio/twilio-go.png?branch=main)](https://travis-ci.com/twilio/twilio-go)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/twilio/twilio-go)](https://pkg.go.dev/github.com/twilio/twilio-go)
 [![Release](https://img.shields.io/github/release/twilio/twilio-go.svg)](https://github.com/twilio/twilio-go/releases/latest)
