@@ -13,7 +13,8 @@ jobs:
       - name: Checkout twilio-php
         uses: actions/checkout@v2
 
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
       - name: Test tags
-        env:
-          GITHUB_TAG: ${{ env.GITHUB_TAG }}
-        run: echo $GITHUB_TAG
+        run: echo $RELEASE_VERSION
