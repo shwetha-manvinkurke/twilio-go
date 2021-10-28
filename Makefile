@@ -44,4 +44,4 @@ cover:
 
 
 testme:
-	echo ${RELEASE_VERSION}
+	echo ${GITHUB_TAG}
