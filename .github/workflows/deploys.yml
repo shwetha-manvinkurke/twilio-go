@@ -25,5 +25,5 @@ jobs:
       - name: Build and Push image
         run: echo $GITHUB_TAG && make testme && make docker-build docker-push
         env:
-          GITHUB_TAG: ${{ GITHUB_REF##*/ }}
+          GITHUB_TAG: ${{ GITHUB_REF#refs/*/ }}
 
