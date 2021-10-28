@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build and Push image
-        run: make testme && make docker-build docker-push
+        run: echo $GITHUB_TAG && make testme && make docker-build docker-push
         env:
-          GITHUB_TAG: ${GITHUB_REF#refs/*/}
+          GITHUB_TAG: ${{ format('{0}#refs/*/', github.ref) }}
 
