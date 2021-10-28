@@ -25,5 +25,6 @@ jobs:
       - name: Build and Push image
         run: echo $GITHUB_TAG && make testme && make docker-build docker-push
         env:
-          GITHUB_TAG: ${{ format('{0}#refs/*/', github.ref) }}
+#          GITHUB_TAG: ${{ format('{0}#refs/*/', github.ref) }}
+          GITHUB_TAG: ${{ github.event.release.tag_name }}
 
