@@ -41,3 +41,7 @@ GO_DIRS = $(shell go list ./... | grep -v /rest/ | grep -v /form )
 cover:
 	go test ${GO_DIRS} -coverprofile coverage.out
 	go test ${GO_DIRS} -json > test-report.out
+
+
+testme:
+	echo ${RELEASE_VERSION}
