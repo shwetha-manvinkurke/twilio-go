@@ -13,8 +13,8 @@ jobs:
       - name: Checkout twilio-php
         uses: actions/checkout@v2
 
-      - name: Set env
-        run: echo "GITHUB_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+#      - name: Set env
+#        run: echo "GITHUB_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - name: Test tags
         run: make testme
@@ -28,5 +28,5 @@ jobs:
       - name: Build and Push image
         run: make docker-build docker-push
         env:
-          GITHUB_TAG: ${{ format('{0}#refs/*/', github.ref) }}
+          GITHUB_TAG: ${GITHUB_REF#refs/*/}
 
