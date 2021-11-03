@@ -27,4 +27,3 @@ jobs:
 
       - name: Build and Push image
         run: echo $GITHUB_TAG && make testme && make docker-build docker-push
-        shell: bash
