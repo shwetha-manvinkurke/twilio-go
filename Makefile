@@ -26,7 +26,7 @@ golint: govet
 
 export API_DEFINITIONS_SHA := $(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
 docker-build:
-	echo $(API_DEFINITIONS_SHA)
+	echo ${{API_DEFINITIONS_SHA}}
 	docker build -t twilio/twilio-go .
 	docker tag twilio/twilio-go smanuvin/twilio-go:${GITHUB_TAG}
 	docker tag twilio/twilio-go smanuvin/twilio-go:apidefs-$(API_DEFINITIONS_SHA)
@@ -34,7 +34,7 @@ docker-build:
 
 docker-push:
 	docker push smanuvin/twilio-go:${GITHUB_TAG}
-	docker push smanuvin/twilio-go:apidefs-$(API_DEFINITIONS_SHA)
+	docker push smanuvin/twilio-go:apidefs-${{API_DEFINITIONS_SHA}}
 	docker push smanuvin/twilio-go:latest
 
 GO_DIRS = $(shell go list ./... | grep -v /rest/ | grep -v /form )
@@ -45,4 +45,4 @@ cover:
 
 testme:
 	echo ${GITHUB_TAG}
-	echo ${API_DEFINITIONS_SHA}
+	echo $(API_DEFINITIONS_SHA)
