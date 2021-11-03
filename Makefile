@@ -24,7 +24,7 @@ golint: govet
 	golangci-lint run
 	go mod tidy
 
-export API_DEFINITIONS_SHA := $(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
+API_DEFINITIONS_SHA=$(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
 docker-build:
 	git log --oneline
 	echo ${API_DEFINITIONS_SHA}
