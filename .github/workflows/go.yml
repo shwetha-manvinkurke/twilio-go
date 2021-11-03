@@ -39,14 +39,14 @@ jobs:
       - name: Test
         run: go test ./...
         
-      - name: Coverage
-        run: make cover
+#      - name: Coverage
+#        run: make cover
 
-      - name: Run cluster tests
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        run: make cluster-test
+#      - name: Run cluster tests
+#        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+#        run: make cluster-test
 
-      - name: Deploy
-        if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' && matrix.go == '1.16' }}
-        run: make docker-build && make docker-push
+#      - name: Deploy
+#        if: ${{ github.event_name == 'create' && github.event.ref_type == 'tag' && matrix.go == '1.16' }}
+#        run: make docker-build && make docker-push
 
