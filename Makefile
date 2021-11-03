@@ -26,6 +26,7 @@ golint: govet
 
 export API_DEFINITIONS_SHA=$(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
 docker-build:
+	echo ${API_DEFINITIONS_SHA}
 	docker build -t twilio/twilio-go .
 	docker tag twilio/twilio-go smanuvin/twilio-go:${GITHUB_TAG}
 	docker tag twilio/twilio-go smanuvin/twilio-go:apidefs-${API_DEFINITIONS_SHA}
