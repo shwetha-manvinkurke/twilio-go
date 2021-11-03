@@ -24,10 +24,10 @@ golint: govet
 	golangci-lint run
 	go mod tidy
 
-API_DEFINITIONS_SHA=$(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
+export API_DEFINITIONS_SHA=$(shell git log --oneline | grep Regenerated | head -n1 | cut -d ' ' -f 5)
 docker-build:
 	docker build -t twilio/twilio-go .
-	#docker tag twilio/twilio-go smanuvin/twilio-go:${GITHUB_TAG}
+	docker tag twilio/twilio-go smanuvin/twilio-go:${GITHUB_TAG}
 	docker tag twilio/twilio-go smanuvin/twilio-go:apidefs-${API_DEFINITIONS_SHA}
 	docker tag twilio/twilio-go smanuvin/twilio-go:latest
 
